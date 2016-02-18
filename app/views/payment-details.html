@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  GOV.UK prototype kit
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  <div class="grid-row">
+    <div class="column-two-thirds">
+			<h1 class="heading-large">Your payment details</h1>
+			<form id="payment-details" autocomplete="off" method="post" action="/worldpay1n">
+				<div class="form-group">
+					<span class="error-container"></span>
+					<label class="form-label" for="refnumber">
+				    Reference number
+				    <span class="form-hint">For example, 12345678.</span>
+					</label>
+				  <input style="text-transform: uppercase" name="refnumber" id="refnumber" type="text" class="form-control" data-parsley-required="true" data-parsley-error-message="Please enter a valid reference number" aria-required="true">
+				</div>
+
+				<div class="form-group">
+					<span class="error-container"></span>
+					<label class="form-label" for="amountnumber">Amount to pay</label>
+					<span class="poundsign">£</span>
+					<input type="text" data-parsley-pattern="(^\£?(?!0(\.00)|[00.]*?$)(([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]{1,5})(\.\d{1,2})?$))" name="amountnumber" id="amountnumber" class="form-control text" type="range"	data-parsley-range="[0.01, 99999.99]" data-parsley-range-message="Please enter an amount up to £99,999.99" data-parsley-required="true" data-parsley-required-message="Please enter the full amount due" aria-required="true">
+				</div>
+		    <nav class="form-steps" role="navigation">
+	        <button type="submit" name="action" value="next" class="button">Next</button><br><br>
+	        <a id="backButtonBottom" href="/">Back</a>
+		    </nav>
+			</form>
+		</div>
+  </div>
+</main>
+
+{% endblock %}

@@ -1,0 +1,809 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  GOV.UK prototype kit
+{% endblock %}
+
+{% block content %}
+
+<!-- additional HTML head items -->
+
+<style type="text/css" media="screen">
+td.error {background-color: #FFFFFF; width: 100%;}
+td.one {background-color: #FFFFFF; }
+A.one:Link {text-decoration: none; color: #0B0C0C; font-family: ; font-size: 10pt;}
+A.one:Visited {text-decoration: none; color: #0B0C0C; font-family: ; font-size: 10pt;}
+A.one:Active {text-decoration: none; color: #0B0C0C; font-family: ; font-size: 10pt;}
+A.one:Hover {text-decoration: underlined; color: #0B0C0C; font-family: ; font-size: 10pt;}
+td.width190 {width:190px;}
+td.cardlabel {background-color: #FFFFFF; }
+td.two {background-color: #ffffff; }
+A.twoinstr:Link {text-decoration: underlined; color: #0B0C0C;}
+A.twoinstr:Visited {text-decoration: underlined; color: #0B0C0C;}
+A.twoinstr:Active {text-decoration: underlined; color: #0B0C0C;}
+A.twoinstr:Hover {text-decoration: underlined; color: #0B0C0C;}
+td.three {background-color: #ffffff; width:100%;}
+A.three:Link {text-decoration: none; color: #0B0C0C; font-family: ; font-size: 10pt;}
+A.three:Visited {text-decoration: none; color: #0B0C0C; font-family: ; font-size: 10pt;}
+A.three:Active {text-decoration: none; color: #0B0C0C; font-family: ; font-size: 10pt;}
+A.three:Hover {text-decoration: underlined; color: #0B0C0C; font-family: ; font-size: 10pt;}
+A.brand:Link {text-decoration: underlined; color: #000000;}
+A.brand:Visited {text-decoration: underlined; color: #000000;}
+A.brand:Active {text-decoration: underlined; color: #000000;}
+A.brand:Hover {text-decoration: underlined; color: #0B0C0C;}
+td.brand {background-color: #FFFFFF; vertical-align: top; text-align: left;}
+img.printonly {display:none;}
+.hiddenBankDetails { display: none; }
+</style>
+
+<script type="text/javascript">(function(){if(navigator.userAgent.match(/IEMobile\/10\.0/)){var d=document,c="appendChild",a=d.createElement("style");a[c](d.createTextNode("@-ms-viewport{width:auto!important}"));d.getElementsByTagName("head")[0][c](a);}})();</script>
+
+<style>
+    @media (min-width: 769px) {
+      #global-header .header-wrapper .header-global {
+        float: left;
+        width: 33.33%;
+      }
+      #global-header .header-wrapper .header-global .header-logo,
+      #global-header .header-wrapper .header-global .site-search {
+        width: 100%!important;
+      }
+    }
+    @media (min-width: 769px) {
+      #global-header .header-wrapper .header-proposition {
+        width: 66.66%;
+        float: left;
+      }
+    }
+    @media (max-width:768px) {
+      #global-header .header-proposition #proposition-name {
+        padding-left: 15px;
+      }
+    }
+
+    h1 {
+      font-size:36px;
+      font-family: "nta", Arial, sans-serif!important;
+    }
+
+    table tr td, table tr td span {
+    	font-family: "nta", Arial, sans-serif!important;
+    	color: #0b0c0c!important;
+    	font-size:19px!important;
+    }
+
+    table tr td h1, table tr td h2 {
+    	font-weight: bold;
+    }
+
+    table tr td.error {
+    	text-align: left;
+    }
+
+    table tr td.error span {
+    	color:#f00!important;
+    }
+
+    .cardlabel {
+    	padding: 20px;
+      	background-color: #eee;
+    }
+
+    .cardlabel td a span {
+      text-align: center;
+      float: left;
+    }
+
+    .cardlabel td a span input {
+      display: block;
+      margin: auto;
+    }
+
+    .cardlabel td {
+    	float: left;
+      width:20%;
+    }
+
+    @media (max-width: 767px) {
+    	.cardlabel td span {
+    		font-size: 12px!important;
+    	}
+    }
+
+    .cardlabel table {
+    	margin-left: auto;
+    	margin-right: auto;
+    	width: 100%;
+    }
+
+    @media (min-width: 769px) {
+    	.cardlabel td {
+    		padding: 0 2.5%;
+    		display: block;
+    	}
+
+    	.cardlabel td:first-child {
+    		padding-left: 0;
+    	}
+    }
+
+    .cardlabel td a {
+    	display: block;
+    	clear: both;
+    }
+
+    .cardlabel td img {
+    	margin-bottom:-15px;
+    }
+
+    .cardlabel + td {
+    	display: none;
+    }
+
+    form {
+    	margin: 30px auto 0;
+      max-width: 768px;
+      padding: 0 15px;
+    }
+
+    @media(max-width: 767px) {
+      form h1 {
+        font-size: 32px;
+        line-height: 1em;
+      }
+    }
+
+    input#op-DPCancel {
+    	display: none;
+    }
+
+    label[for="op-DPCancel"] {
+      float: none;
+      display: block;
+      margin: auto;
+      width: 100%;
+      text-align: center
+      max-width:180px;
+    }
+
+    @media (min-width: 769px) {
+    	label[for="op-DPCancel"] {
+    		max-width:200px;
+    	}
+    }
+
+    label[for="op-DPCancel"] b {
+      font-weight: normal;
+      cursor: pointer;
+      color: #005ea5;
+    }
+
+    @media (min-width: 769px) {
+    	.repayments form {
+    		width: 66%;
+    	}
+    }
+
+    table.container {
+      width:100%;
+      margin: 0;
+    }
+
+    @media (max-width: 480px) {
+      table.containercell {
+        table-layout: fixed;
+      }
+    }
+
+    #footer {
+      border-top: 1px solid #a1acb2!important;
+      margin-top: 20px;
+    }
+
+    table tr td input {
+      padding: .3em;
+    }
+
+    table tr td select {
+      box-sizing: border-box;
+      align-items: center;
+      white-space: pre;
+      -webkit-rtl-ordering: logical;
+      color: #0B0C0C;
+      cursor: default;
+      margin: 0em 0 0 8px;
+      color: initial;
+      letter-spacing: normal;
+      word-spacing: normal;
+      text-transform: none;
+      text-indent: 0px;
+      text-shadow: none;
+      display: inline-block;
+      text-align: start;
+    }
+
+    table tr td.width190 {
+      min-width: 190px;
+      width:33%;
+    }
+
+    @media only screen and (max-width : 480px) {
+      table tr td.width190 {
+        min-width: 160px;
+      }
+    }
+
+    input[type=^"text"] {
+      margin: 10px 0;
+    }
+
+    label span {
+      float: left;
+    }
+
+    body td.one td.two.width190 {
+      padding: 0 0 20px 3px;
+    }
+
+    input[type="text"], input[type="text/"], input[type="search"] {
+      font-family: "nta",Arial,sans-serif;
+      font-size: 16px;
+      line-height: 1.25;
+      font-weight: 400;
+      text-transform: none;
+      border: 1px solid #bbb;
+      min-width: 13em!important;
+      margin: 0 0.5em;
+      padding: 0.3em;
+      width: 100%;
+      max-width: 15em;
+    }
+
+    input[size="4"] {
+      min-width: 4em!important;
+      max-width: 5em;
+    }
+
+    table tr td hr {
+      display:none;
+    }
+
+    table tr td select {
+      height: 30px;
+      border-radius: 0;
+      font-size: 14px;
+      width: 100%;
+      max-width: 209px;
+      background-color: transparent;
+      line-height: 1;
+      border: 1px solid #bbb;
+      min-width: 17em;
+    }
+
+    table tr td select[name^="cardExp."] {
+      min-width: 2em;
+      width: auto;
+    }
+
+    nobr, #noncardGroupHeadingselected {
+      display: none;
+    }
+
+    button[type="submit"] {
+      background-color: #00823B !important;
+      font-size: 19px !important;
+      border-radius: 0 !important;
+      width: 10em;
+      text-align: center;
+      height: 2.5em;
+      padding: 6px 2px 5px !important;
+      margin: 10px 0px 5px 7px!important;
+      -webkit-box-shadow: 0 2px 0 #003518;
+      -moz-box-shadow: 0 2px 0 #003518;
+      box-shadow: 0 2px 0 #003518;
+      content: 'Make payment';
+      float: left;
+      color: white;
+      cursor: pointer;
+      border: 0;
+    }
+
+    .cancelLink {
+      float: left;
+      margin: 22px 0 0 0;
+    }
+
+    .cancelLink.addition {
+      margin:5px 0 15px;
+    }
+
+    @media only screen and (max-width : 480px) {
+      button[type="submit"] {
+        margin-left: 0!important;
+      }
+      .cancelLink {
+        margin-top:10px;
+      }
+    }
+
+    #print_buttons {
+      padding: 10px 0 10px 8px;
+      float: left;
+      margin: 30px 0;
+      border: 1px solid #ccc;
+      border-right: 0;
+      border-left: 0;
+      width: 100%;
+    }
+
+    td.brand {
+      padding-left:6px;
+      float: left;
+      vertical-align: middle;
+    }
+
+    td.brand span {
+      margin-top:6px;
+      float: left;
+    }
+
+    .topLabel {
+      display: none;
+      margin-top: 10px;
+    }
+
+    @media only screen and (max-width : 480px) {
+      body .topLabel{
+      	display: block;
+      }
+      body .two.width190{
+      	display:none;
+      }
+      body table input, body table select {
+        margin-left: 0!important;
+      }
+
+      label[for="cardCVV"]{
+        padding: 5px 10px 0 0px;
+      }
+    }
+
+    @media only screen and (min-width : 481px) {
+      label[for="cardCVV"] a {
+        float: left;
+        clear: both;
+      }
+    }
+
+    .paydetails {
+      width: 100%;
+      padding: 10px 0;
+      float: left;
+      clear: both;
+      border-bottom: 1px solid #ccc;
+      margin: 0;
+      display: inline-block;
+    }
+
+    .paydetails img {
+      width: 40%;
+      display: none;
+    }
+
+    @media only screen and (min-width : 481px) {
+      .paydetails {
+        width: 85%;
+      }
+      .paydetails img {
+        display: inline-block;
+      }
+    }
+
+    table tr.paydetails td.width190 {
+      width:auto;
+    }
+
+    p {
+      font-size: 19px!important;
+    }
+
+    .mobile-buttons {
+      display: block;
+    }
+
+    .desktop-buttons {
+      display: none;
+    }
+
+    @media only screen and (min-width : 481px) {
+      .mobile-buttons {
+        display: none;
+      }
+      .desktop-buttons {
+        display: table-row;
+      }
+    }
+
+    h3 {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 0 0 10px
+    }
+
+    #cardGroupHeadingselected + tr + tr, #noncardGroupHeadingselected + tr + tr {
+      display: none;
+    }
+
+    .no-border tr td {
+      border-bottom: 0;
+    }
+
+    .block-label input {
+      top:24px;
+    }
+  </style>
+
+<main id="content" role="main">
+  <form action="/worldpay2n" class="no-border" method="post" autocomplete="off">
+
+<table class="container" cellpadding="0" cellspacing="0" align="center">
+	<tbody><tr>
+		<td>
+			<!-- the main content table -->
+<table class="containercell outerpaymenttable" cellspacing="0" cellpadding="2">
+				<tbody><tr>
+					<td class="title" colspan="2">
+						<!-- page title -->
+						<h1>Secure Payment Page</h1>
+						<!--  end page title -->
+					</td>
+				</tr>
+<!-- end tableHead.html -->
+
+<!-- dispPage.templ $Revision$ -->
+<!--WP start dispatcher/dispPage -->
+<input type="hidden" name="PaymentID" value="ukdc1-pz-cen07-dppr-1433243637644">
+
+
+
+<!--WP start testModeMessage -->
+
+<tr>
+	<td colspan="2" class="error" align="center"><span style=" font-family: ; font-size: 10pt; color: #AF1324;">TEST MODE - This is not a live transaction.</span></td>
+</tr>
+
+<!--WP end testModeMessage -->
+
+<!--WP Intro text -->
+<tr>
+	<td colspan="2" class="one" align="left"><span style=" font-family: ; font-size: ; color: #0B0C0C;">Please review your purchase details, then select a payment method to continue.</span></td>
+</tr>
+<!--WP Intro text -->
+
+<!--WP Feedback messages - uses comp.dispatcher.error etc. -->
+
+<!--WP end Feedback messages -->
+
+<!--WP Details -->
+<tr>
+	<td colspan="2" class="one">
+		<table cellpadding="0" cellspacing="0" border="0">
+
+		<!--WP language select -->
+
+<!--WP language select -->
+
+
+
+		<!-- BIBIT country select -->
+
+
+<!--WP currency drop down -->
+
+
+		<input type="hidden" name="authCurrency" value="GBP">
+
+<!--WP end currency drop down -->
+
+<!--WP Description -->
+
+<!--WP END Description -->
+
+<!--WP FuturePay -->
+
+
+
+		<tbody><tr class="paydetails">
+			<td class="one width190" align="left" valign="top"><span style=" font-family: ; font-size: 10pt; color: #0B0C0C;">Description</span>&nbsp;&nbsp;</td>
+			<td class="one" align="left" valign="top">
+	<span style=" font-family: ; font-size: 10pt; color: #0B0C0C;"><b>Payment to DWP</b></span></td></tr>
+
+
+
+
+		<tr class="paydetails">
+			<td class="one width190" align="left" valign="top"><span style=" font-family: ; font-size: 10pt; color: #0B0C0C;">Amount</span>&nbsp;&nbsp;</td>
+			<td class="one width190" align="left" valign="top"><span style=" font-family: ; font-size: 10pt; color: #0B0C0C;"><b>&pound; {{ amount }}</b></span></td>
+		</tr>
+
+
+<!--WP RFP attributes-->
+
+<!--WP RFP END-->
+
+<!--WP LFP attributes-->
+
+<!--WP END LFP -->
+
+
+<!--WP END FP -->
+		</tbody></table>
+	</td>
+</tr>
+
+<!--WP END Details -->
+
+<!-- start Bibit Order Contents --><!-- end Bibit Order Contents -->
+
+<!--WP clickable card logos -->
+	<tr valign="middle">
+		<td colspan="2" class="one" align="left">
+			<div class="print_buttons">
+				</div><table width="100%" cellpadding="0" cellspacing="0" border="0">
+				<tbody><tr style="display:none;">
+					<td class="three" align="left" valign="middle"><h2>&nbsp;Select your payment method</h2></td>
+					<td class="one" align="right" style="display: none;"><a href="https://secure-test.worldpay.com/global3/payment/default/help_dispatcher_en.html" target="_blank" title="Choose your payment method. Opens in a new window. - Opens in a new window"><img src="/public/wp_assets/help.gif" alt="Choose your payment method. Opens in a new window." style="border:0px;" class="print_buttons"></a></td>
+				</tr>
+				<tr id="cardGroupHeadingselected" style="display:none;">
+ 	<td class="two" align="left">&nbsp;<span style=" font-family: ; font-size: 10pt; color: #0B0C0C;"><b>Cards</b></span></td>
+ 	<td class="one" align="center">&nbsp;</td>
+</tr>
+
+<tr style="display:none;">
+ 	<td class="cardlabel" align="center">
+ 		<table cellpadding="2" cellspacing="3" border="0">
+ 			<tbody><tr>
+				<td align="center" valign="top" style="display: none;"><input name="op-DPChoose-DINERS^SSL" type="image" src="/public/wp_assets/DINERS.gif" alt="Diners"><br><span style=" font-family: ; font-size: ; color: #0B0C0C;">Diners</span></td>
+				<td align="center" valign="top"><span style=" font-family: ; font-size: ; color: #0B0C0C;"><input name="op-DPChoose-ECMC^SSL" type="image" src="/public/wp_assets/ECMC.gif" alt="MasterCard"><br>MasterCard</span></td>
+ 				<td align="center" valign="top"><span style=" font-family: ; font-size: ; color: #0B0C0C;"><input name="op-DPChoose-VISA^SSL" type="image" value="Visa" src="/public/wp_assets/Visa.gif" alt="Visa"><br>Visa</span></td>
+ 				<td align="center" valign="top" style="display: none;"><span style=" font-family: ; font-size: ; color: #0B0C0C;"><input name="op-DPChoose-AMEX^SSL" type="image" src="/public/wp_assets/AMEX.gif" alt="Amex"><br>Amex</span></td>
+ 				<td align="center" valign="top"><span style=" font-family: ; font-size: ; color: #0B0C0C;"><input name="op-DPChoose-MAESTRO^SSL" type="image" src="/public/wp_assets/Maestro.gif" alt="Maestro"><br>Maestro</span></td>
+ 				<td align="center" valign="top"><span style=" font-family: ; font-size: ; color: #0B0C0C;"><input name="op-DPChoose-JCB^SSL" type="image" src="/public/wp_assets/JCB.gif" alt="JCB"><br>JCB</span></td>
+			</tr>
+		</tbody></table>
+ 	</td>
+ 	<td class="one" align="center">&nbsp;</td>
+</tr>
+
+<h2>Select your payment method</h2><br>
+<fieldset class="inline">
+  <div class="form-group">
+    <span class="error-container"></span>
+      <legend class="visuallyhidden">Select your payment method</legend>
+      <label class="block-label" for="radio-1">
+        <input id="radio-1" type="radio" name="cardtype" value="MasterCard" data-parsley-mincheck="1" required data-parsley-error-message="Please select a card type" aria-required="true">
+         <img src="/public/wp_assets/MasterCard.gif">
+      </label>
+      <label class="block-label" for="radio-2">
+        <input id="radio-2" type="radio" name="cardtype" value="Visa">
+         <img src="/public/wp_assets/Visa.gif">
+      </label>
+      <label class="block-label" for="radio-3">
+        <input id="radio-3" type="radio" name="cardtype" value="Maestro">
+         <img src="/public/wp_assets/Maestro.gif">
+      </label>
+      <label class="block-label" for="radio-4">
+        <input id="radio-4" type="radio" name="cardtype" value="JCB">
+         <img src="/public/wp_assets/JCB.gif">
+      </label>
+    </div>
+  </fieldset>
+  <input class="button" type="submit" value="Continue">
+<tr>
+ 	<td class="cardlabel" align="center">
+ 		<table cellpadding="2" cellspacing="3" border="0">
+ 			<tbody><tr>
+				<td align="center" valign="top" style="display: none;"><input name="op-DPChoose-AIRPLUS^SSL" type="image" src="/public/wp_assets/AIRPLUS.gif" alt="AirPlus"><br><span style=" font-family: ; font-size: ; color: #0B0C0C;">AirPlus</span></td>
+				<td align="center" valign="top" style="display: none;"><span style=" font-family: ; font-size: ; color: #0B0C0C;"><input name="op-DPChoose-UATP^SSL" type="image" src="/public/wp_assets/UATP.gif" alt="UATP"><br>UATP</span></td>
+ 				<td align="center" valign="top"></td>
+ 				<td align="center" valign="top"></td>
+ 				<td align="center" valign="top"></td>
+ 				<td align="center" valign="top"></td>
+			</tr>
+		</tbody></table>
+ 	</td>
+ 	<td class="one" align="center">&nbsp;</td>
+</tr>
+
+
+
+<tr id="noncardGroupHeadingselected">
+ 	<td class="two" align="left">&nbsp;<span style=" font-family: ; font-size: 10pt; color: #0B0C0C;"><b>Alternative payments</b></span></td>
+ 	<td class="one" align="center">&nbsp;</td>
+</tr>
+
+<tr style="display: none;">
+ 	<td class="cardlabel" align="center">
+ 		<table cellpadding="2" cellspacing="3" border="0">
+ 			<tbody><tr>
+				<td align="center" valign="top"><input name="op-DPChoose-TRANSFER_GB^BANK" type="image" src="/public/wp_assets/TRANSFER_GB.gif" alt="Bank transfer - UK"><br><span style=" font-family: ; font-size: ; color: #0B0C0C;">Bank transfer - UK</span></td>
+				<td align="center" valign="top"></td>
+ 				<td align="center" valign="top"></td>
+ 				<td align="center" valign="top"></td>
+ 				<td align="center" valign="top"></td>
+ 				<td align="center" valign="top"></td>
+			</tr>
+		</tbody></table>
+ 	</td>
+ 	<td class="one" align="center">&nbsp;</td>
+</tr>
+
+
+<!--WP cancel button -->
+<tr>
+					<td class="three" align="right"><label for="op-DPCancel"><span style=" font-family: ; font-size: 12pt; color: #0B0C0C;"><a href="payment-cancelled" tabindex="250" class="cancelLink addition">Cancel payment</a></span></label>&nbsp;</td>
+					<td class="one" align="left"><input name="op-DPCancel" id="op-DPCancel" type="image" src="/public/wp_assets/cancel.gif" alt="Cancel"></td>
+				</tr>
+
+<!--WP end cancel button -->
+			</tbody></table>
+		</td>
+	</tr>
+<!--WP end clickable card logos -->
+
+<!-- WP brand logo -->
+<!-- start brand.comp -->
+			<tr>
+				<td colspan="2" class="brand">
+					<table width="100%" cellpadding="0" cellspacing="0" border="0">
+						<tbody><tr>
+							<td class="brand" width="150">
+							<a href="http://www.worldpay.com/" target="_blank" title="Opens in a new window"><img src="/public/wp_assets/brand.gif" alt="Powered by WorldPay" border="0"></a>
+							</td>
+							<td class="brand"><span style=" font-family: Verdana,Geneva,Arial,Helvetica,Sans-Serif; font-size: 8pt; color: #000000;">For help with your payment visit the: <a href="https://secure-test.worldpay.com/global3/brands/worldpay/payment/fixed/help_brand_en.html" target="_blank" title="WorldPay Help - Opens in a new window" class="brand">WorldPay Help</a>.</span></td>
+						</tr>
+					</tbody></table>
+				</td>
+			</tr>
+<!-- end brand.comp -->
+
+<!-- WP brand logo -->
+
+<script type="text/javascript">
+
+	var selectBox=document.getElementsByName("authCurrency")[0];
+	if(selectBox){
+		selectBox.onchange = function(){
+			document.getElementById("op-Currency").click();
+		};
+	}
+</script>
+
+<!--WP end dispatcher/dispPage -->
+
+
+
+
+
+						</tbody></table>
+					</td>
+				</tr>
+			</tbody></table>
+<table>
+		<tbody><tr>
+			<td></td>
+		</tr>
+</tbody></table>
+<input type="hidden" name="amountnumber" value="{{ amount }}">
+</form>
+
+<script src="/public/wp_assets/jquery.min.js"></script>
+<script>
+  $('label').each(function () {
+    $(this).clone().insertBefore($(this).closest('tr').find('input[type="text"]')).addClass('topLabel');
+  });
+
+  $('td').find('em:contains("Indicates a required field")').closest('td').css("display", "none");
+
+  //revove * Indicates a required field
+  $('td').find('em:contains("Indicates a required field")').closest('td').css( "display", "none" );
+
+  //Removes zip code text from label
+  $('td').find('span:contains("Postcode/ZIP code")').text('Postcode');
+
+  //remove asterix
+  var findAsterix = $('span,label');
+
+  for (var i = 0; i < findAsterix.length; ++i) {
+    findAsterix[i].innerHTML = findAsterix[i].innerHTML.replace(/\*?/g,'');
+  }
+
+  var findSpace = document.getElementsByTagName('span');
+
+  for (var j = 0; j < findSpace.length; ++j) {
+    findSpace[j].innerHTML = findSpace[j].innerHTML.replace(/\&nbsp;/g,'');
+  }
+
+  //remove fax field and label
+  $('#fax').closest('tr').remove();
+
+  //remove region field and label
+  $('#region').closest('tr').remove();
+
+  //remove phone field and label
+  $('#tel').closest('tr').remove();
+
+  $('td').find('span:contains("Payment reference")').closest('tr').hide();
+
+  //clone Country, Expiry date
+  $('td.width190').find('span:contains("Country")').clone().insertBefore($('span:contains("Country")').closest('tr').find('select[name="country"]')).addClass('topLabel countryLabel');
+  $('td.width190').find('span:contains("Expiry date")').clone().insertBefore($('span:contains("Expiry date")').closest('tr').find('select[name="cardExp.month"]')).addClass('topLabel expiryLabel');
+
+  //add for mobile
+  $('head').append('<meta name="viewport" content="width=device-width, initial-scale=1">');
+
+  //add optional
+  $('label[for="address2"] span').text('Address 2 (optional)');
+  $('label[for="address3"] span').text('Address 3 (optional)');
+
+  //liability text on a second line
+
+  var myString = $( "b:contains('Payment to HMRC')" ).text();
+  var arr = myString.split('- ');
+
+  $( "b:contains('Payment to HMRC')" ).html(arr[0] + "</br>" + arr[1]);
+
+  // security code row at the end
+  var rowCode = $('label[for=cardCVV]').parent().parent();
+	var rowCardholder = $('label[for=name]').parent().parent();
+	rowCardholder.after(rowCode);
+
+	// taborder to address new security code position in the form
+	$("#cardCVV").attr("tabindex", 131);
+
+	// restyle Security code with a separate what is this link
+	$('label[for=cardCVV]').html('<span>Security Code</span><a href="https://secure.worldpay.com/global3/payment/default/help_securitycode_en.html" class="twoinstr" target="_blank" title="Security code help - Opens in new window." style="margin-left:5px;color:#005ea5 !important">What is this?</a>');
+	$('label[for=name] span').text("Name (as shown on card)");
+
+  // Hide help buttons
+  $('td').find('img[src="/images/buttons/help.gif"]').closest('td').hide();
+
+  // Style payment details
+  var detailsArr = ["Payment method", "Description", "Amount"];
+  var lengthArr = $(detailsArr).size();
+  i = 0;
+
+  while (i < lengthArr) {
+    $('td').find('span:contains('+detailsArr[i]+')').closest('tr').addClass('paydetails');
+    i++;
+  }
+
+  // Remove unwanted cards
+  var cardsArr = ["Diners", "Amex", "AirPlus", "UATP"];
+  var lengthArr = $(cardsArr).size();
+  i = 0;
+
+  while (i < lengthArr) {
+    $('td').find('span:contains('+cardsArr[i]+')').closest('td').hide();
+    i++;
+  }
+
+  $('#noncardGroupHeadingselected').next('tr').hide();
+
+  // Change cancel link
+  cancelLink = '<a href="payment-cancelled" tabindex="250" class="cancelLink addition">Cancel payment</a>';
+  $('td label').find('b:contains(Cancel)').closest('span').html(cancelLink);
+
+  $('td').find('span:contains(Description)').closest('td').next('td').find('span b').html('Payment to DWP');
+
+  //remove email field and label
+  $('#email').closest('tr').remove();
+</script>
+
+
+
+<script id="hiddenlpsubmitdiv" style="display: none;"></script><script>try{for(var lastpass_iter=0; lastpass_iter < document.forms.length; lastpass_iter++){ var lastpass_f = document.forms[lastpass_iter]; if(typeof(lastpass_f.lpsubmitorig2)=="undefined"){ lastpass_f.lpsubmitorig2 = lastpass_f.submit; if (typeof(lastpass_f.lpsubmitorig2)=='object'){ continue;}lastpass_f.submit = function(){ var form=this; var customEvent = document.createEvent("Event"); customEvent.initEvent("lpCustomEvent", true, true); var d = document.getElementById("hiddenlpsubmitdiv"); if (d) {for(var i = 0; i < document.forms.length; i++){ if(document.forms[i]==form){ if (typeof(d.innerText) != 'undefined') { d.innerText=i; } else { d.textContent=i; } } } d.dispatchEvent(customEvent); }form.lpsubmitorig2(); } } }}catch(e){}</script></body></html>
+
+</main>
+
+{% endblock %}
